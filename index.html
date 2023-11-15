@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chess Game</title>
+  <style>
+    /* Add your CSS styles for the chessboard here */
+  </style>
+</head>
+<body>
+
+  <script>
+    // Add your ChessPiece, ChessBoard, Player, and ChessGame classes here
+
+    // Function to display the chessboard in the console (for testing purposes)
+    function displayBoard(board) {
+      for (let row = 0; row < 8; row++) {
+        console.log(board.grid[row].map(piece => (piece ? piece.type[0] : '.')).join(' '));
+      }
+    }
+
+    // Function to get player move input from the console (for testing purposes)
+    function getPlayerMove() {
+      const readlineSync = require('readline-sync');
+      const sourceRow = parseInt(readlineSync.question('Enter source row: '));
+      const sourceCol = parseInt(readlineSync.question('Enter source column: '));
+      const destRow = parseInt(readlineSync.question('Enter destination row: '));
+      const destCol = parseInt(readlineSync.question('Enter destination column: '));
+
+      return { sourceRow, sourceCol, destRow, destCol };
+    }
+
+    // Create a new game and initialize it
+    const chessGame = new ChessGame();
+    chessGame.initializeGame();
+
+    // Main game loop
+    while (!chessGame.isGameOver()) {
+      // Display the current state of the board and whose turn it is
+      displayBoard(chessGame.board);
+      console.log(`It's ${chessGame.currentPlayer.name}'s turn.`);
+
+      // Get the player's move input
+      const move = getPlayerMove();
+
+      // Attempt to make the move on the board
+      if (chessGame.board.movePiece(move.sourceRow, move.sourceCol, move.destRow, move.destCol)) {
+        // Switch to the next player's turn
+        chessGame.switchTurn();
+      } else {
+        console.log('Invalid move. Try again.');
+      }
+    }
+
+    // The game is over, display the result
+    chessGame.displayGameResult();
+  </script>
+
+</body>
+</html>
