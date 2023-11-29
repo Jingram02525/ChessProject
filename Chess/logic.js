@@ -362,7 +362,8 @@ document.querySelectorAll('.box').forEach(item => {
 
             item.style.backgroundColor = 'blue'
 
-        }// BISHOP
+        }
+        // BISHOP
 
         if (item.innerText == `${toggle}bishop`) {
 
@@ -519,3 +520,13 @@ document.querySelectorAll('.box').forEach(hathiTest => {
     })
 })
 
+// Prevents selection of multiple elements
+z = 0
+document.querySelectorAll('.box').forEach(ee => {
+    ee.addEventListener('click', function () {
+        z = z + 1
+        if (z % 2 == 0 && ee.style.backgroundColor !== 'greenyellow') {
+            coloring()
+        }
+    })
+})
