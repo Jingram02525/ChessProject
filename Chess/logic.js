@@ -77,7 +77,9 @@ function reddish() {
             })
         }
     })
-}
+} // ends reddish
+
+
 
 //reset button
 document.getElementById("reset-btn").addEventListener('click', function () {
@@ -86,6 +88,8 @@ document.getElementById("reset-btn").addEventListener('click', function () {
 
 
 tog = 1
+WhiteCastleChance = true
+BlackCastleChance = false
 
 document.querySelectorAll('.box').forEach(item => {
     
@@ -224,6 +228,23 @@ document.querySelectorAll('.box').forEach(item => {
             if (aside > 1 && aup > 100) {
                 document.getElementById(`b${a - 101}`).style.backgroundColor = 'greenyellow';
             
+            }
+
+            if(WhiteCastleChance==true && a==105 && document.getElementById('b106').innerText== '' && document.getElementById('b107').innerText== '' && document.getElementById('b108').innerText== 'Wrook'){
+                document.getElementById(`b107`).style.backgroundColor = 'greenyellow'
+
+            }
+            if(WhiteCastleChance==true && a==105 && document.getElementById('b104').innerText== '' && document.getElementById('b103').innerText== '' && document.getElementById('b102').innerText== '' && document.getElementById('b101').innerText== 'Wrook'){
+                document.getElementById(`b103`).style.backgroundColor = 'greenyellow'
+
+            }
+            if(BlackCastleChance==true && a==805 && document.getElementById('b806').innerText== '' && document.getElementById('b807').innerText== '' && document.getElementById('b808').innerText== 'Brook'){
+                document.getElementById(`b807`).style.backgroundColor = 'greenyellow'
+
+            }
+            if(BlackCastleChance==true && a==805 && document.getElementById('b804').innerText== '' && document.getElementById('b803').innerText== '' && document.getElementById('b802').innerText== '' && document.getElementById('b801').innerText== 'Brook'){
+                document.getElementById(`b803`).style.backgroundColor = 'greenyellow'
+
             }
 
             item.style.backgroundColor = 'blue';
@@ -489,6 +510,28 @@ document.querySelectorAll('.box').forEach(item => {
     }
 
     reddish()
+        // win requirements
+
+        numOfKings = 0
+        document.querySelectorAll('.box').forEach(win=> {
+            if(win.innerText == 'Wking' || win.innerText == 'Bking'){
+                numOfKings += 1
+            }
+        })
+        if (numOfKings == 1) {
+            setTimeout(() => {
+                // console.log(`${toggle}`)
+                if (tog % 2 == 0) {
+                    alert('White Wins !!')
+                    location.reload()
+                }
+                else if (tog % 2 !== 0) {
+                    alert('Black Wins !!')
+                    location.reload()
+                }
+            }, 100)
+        }
+
 
     })
 })
